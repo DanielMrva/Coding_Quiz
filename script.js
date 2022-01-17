@@ -15,27 +15,45 @@
 // THEN I can save my initials and my score
 
 //var for inputs
-
+var trueButton = document.getElementsByClassName(".true");
+var falseButton = document.getElementsByClassName(".false");
+var startButton = document.getElementById("#start");
+var resetButton = document.getElementById("#reset");
 
 //var for time
 var timerEl = document.querySelector(".Timer");
 
 var timeRemaining = 60;
 
+//var for question tracking
+var totalQuestions = 20;
+var questionsRemaining = totalQuestions;
+var questionList = ["#q1", "#q2", "#q3", "#q4", "#q5", "#q6", "#q7"];
+// var usedQuestions = [, "#q8", "#q9", "#q10", "#q11", "#q12", "#q13", "#q14", "#q15", "#q16", "#q17", "#q18", "#q19", "#q20"]
+
+//var for score
+var score = 0;
+
 function countdown() {
     var timerInterval = setInterval(function() {
         timeRemaining--;
-        timerEl.textContent = `${timeRemaining} seconds.`
-
-        if (timeRemaining === 0) {
+        timerEl.textContent = `${timeRemaining} seconds.`;
+        if (questionsRemaining === 0 || timeRemaining === 0) {
             clearInterval(timerInterval);
-
             endGame();
         }
     }, 1000);
 }
 
-//var for score
+function getQuestion() {
+    var displayQuestion = questionList[Math.floor(Math.random() * questionList.length)];
+    var displayElement = document.getElementsById(displayQuestion);
+    var state = document.displayElement.getAttribute("data-state");
+    console.log(displayQuestion);
+    if (state === "hidden") {
+        // document.getElementsById(displayQuestion).setAttribute("display", "block");
+    }
+}
 
 //shuffles ul li on each question
 // var ul = document.querySelectorAll('ul');
@@ -46,7 +64,18 @@ function countdown() {
 
 //functions
 
-//answer checker.  Use .true .false classes in answers.  
+// //answer checker.  Use .true .false classes in answers.
+// trueButton.addEventListener("click", function() {
+//     score++;
+//     questionsRemaining --;
+//     getQuestion();
+// });
+
+// falseButton.addEventListener("click", function() {
+//     timeRemaining - 5;
+//     questionsRemaining --;
+//     getQuestion();
+// });
     //event listener keyed to clicks; either get values from HTML or listener can be keyed to ".correct" or ".incorrect"
     //correct answers ++ to score and change style of current question to Display: None, and change Display property of next question.
     //incorrect answers -5s to time and advance to next question just like correct answers
@@ -56,7 +85,10 @@ function countdown() {
 //start game function
 function starGame() {
     countdown();
+    getQuestion();
 }
+
+getQuestion();
 
 //end game function?
 
