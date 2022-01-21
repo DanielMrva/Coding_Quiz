@@ -26,80 +26,13 @@ var timerEl = document.getElementById("Timer");
 var timeRemaining = 60;
 
 //var for question tracking
-var totalQuestions = 10;
+var totalQuestions = 20;
 var questionsRemaining = totalQuestions;
-var questionList = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"];
-var usedQuestions = []
-
-//questions will be in objects, with question number, question, answers, and true answer 
-
-var questions = [
-    {
-        "number": "q1",
-        "question": "4+5=?",
-        "answers": ["1", "7", "9", "3"],
-        "trueAnswer": "9",
-    },
-    {
-        "number": "q2",
-        "question": "3x2=?",
-        "answers": ["2", "4", "6", "0"],
-        "trueAnswer": "6",
-    }, 
-    {
-        "number": "q3",
-        "question": "4x5=?",
-        "answers": ["10", "19", "9", "20"],
-        "trueAnswer": "20",
-    }, 
-    {
-        "number": "q4",
-        "question": "2+5=?",
-        "answers": ["7", "3", "11", "10"],
-        "trueAnswer": "7",
-    },
-    {
-        "number": "q5",
-        "question": "10-2=?",
-        "answers": ["12", "7", "10", "8"],
-        "trueAnswer": "8",
-    },
-    {
-        "number": "q6",
-        "question": "12-7=?",
-        "answers": ["19", "5", "8", "3"],
-        "trueAnswer": "5",
-    }, 
-    {
-        "number": "q7",
-        "question": "14+5=?",
-        "answers": ["19", "15", "9", "0"],
-        "trueAnswer": "19",
-    }, 
-    {
-        "number": "q8",
-        "question": "4/2=?",
-        "answers": ["1", "8", "2", "3"],
-        "trueAnswer": "2",
-    },
-    {
-        "number": "q9",
-        "question": "20/4=?",
-        "answers": ["5", "2", "80", "24"],
-        "trueAnswer": "5",
-    },
-    {
-        "number": "q10",
-        "question": "7x7=?",
-        "answers": ["50", "17", "14", "49"],
-        "trueAnswer": "49",
-    }
-]
+var questionList = ["#q1", "#q2", "#q3", "#q4", "#q5", "#q6", "#q7"];
+// var usedQuestions = [, "#q8", "#q9", "#q10", "#q11", "#q12", "#q13", "#q14", "#q15", "#q16", "#q17", "#q18", "#q19", "#q20"]
 
 //var for score
 var score = 0;
-
-//functions
 
 function countdown() {
     var timerInterval = setInterval(function() {
@@ -113,24 +46,31 @@ function countdown() {
 }
 
 function getQuestion() {
-    var selectedQuestion = questionList[Math.floor(Math.random() * questionList.length)];
-    console.log(selectedQuestion);
-    // console.log(selectedQuestion.number);
-    // console.log(selectedQuestion.question);
-    // console.log(selectedQuestion.answers);
-    // console.log(selectedQuestion.trueAnswer);
-    
-    
-};
+    // function randomQuestion() {
+    //     Math.floor(Math.random * questionList.length)
+    // }
+    var displayQuestion = document.getElementById(`q${Math.floor(Math.random * questionList.length)}`);
+    // var displayElement = document.getElementsById(displayQuestion);
+    // var state = document.displayQuestion.getAttribute("data-state");
+    // document.getElementById(displayQuestion).setAttribute("display", "block");
+    document.getElementById(displayQuestion).style.display("block");
+    console.log(displayQuestion);
+};    
+
+//shuffles ul li on each question
+// var ul = document.querySelectorAll('ul');
+// for (var i = this.ul.children.length; i >= 0; i--) {
+//     this.ul.appendChild(this.ul.children[Math.random() * i | 0]);
+// }
+//Doesn't appear to work with multiple uls?...
+
+//functions
+
 
 //start game function
 function startGame() {
-    // countdown();
+    countdown();
     getQuestion();
-}
-
-function endGame() {
-    console.log("the game has eneded");
 }
 
 //event listeners for buttons
