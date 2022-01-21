@@ -17,11 +17,11 @@
 //var for inputs
 var trueButton = document.getElementsByClassName(".true");
 var falseButton = document.getElementsByClassName(".false");
-var startButton = document.getElementById("#start");
+var startButton = document.querySelector(".start-button");
 var resetButton = document.getElementById("#reset");
 
 //var for time
-var timerEl = document.querySelector(".Timer");
+var timerEl = document.getElementById("Timer");
 
 var timeRemaining = 60;
 
@@ -46,14 +46,16 @@ function countdown() {
 }
 
 function getQuestion() {
-    var displayQuestion = questionList[Math.floor(Math.random() * questionList.length)];
-    var displayElement = document.getElementsById(displayQuestion);
-    var state = document.displayElement.getAttribute("data-state");
+    // function randomQuestion() {
+    //     Math.floor(Math.random * questionList.length)
+    // }
+    var displayQuestion = document.getElementById(`q${Math.floor(Math.random * questionList.length)}`);
+    // var displayElement = document.getElementsById(displayQuestion);
+    // var state = document.displayQuestion.getAttribute("data-state");
+    // document.getElementById(displayQuestion).setAttribute("display", "block");
+    document.getElementById(displayQuestion).style.display("block");
     console.log(displayQuestion);
-    if (state === "hidden") {
-        // document.getElementsById(displayQuestion).setAttribute("display", "block");
-    }
-}
+};    
 
 //shuffles ul li on each question
 // var ul = document.querySelectorAll('ul');
@@ -63,6 +65,19 @@ function getQuestion() {
 //Doesn't appear to work with multiple uls?...
 
 //functions
+
+
+//start game function
+function startGame() {
+    countdown();
+    getQuestion();
+}
+
+//event listeners for buttons
+
+startButton.addEventListener("click", function() {
+    startGame();
+});
 
 // //answer checker.  Use .true .false classes in answers.
 // trueButton.addEventListener("click", function() {
@@ -80,19 +95,3 @@ function getQuestion() {
     //correct answers ++ to score and change style of current question to Display: None, and change Display property of next question.
     //incorrect answers -5s to time and advance to next question just like correct answers
     //consider using data-set?  Could probably switch the display property that way, possibly number questions?
-
-
-//start game function
-function starGame() {
-    countdown();
-    getQuestion();
-}
-
-getQuestion();
-
-//end game function?
-
-//timer
-
-//answer array to cycle through questions; 
-//if timer === 0 or questions === 0 then quiz ends
