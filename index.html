@@ -10,7 +10,7 @@
 <body>
     <!-- header. Include score count, title H1, timer counter -->
     <header>
-        <p class="score">Score</p>
+        <p id="score"></p>
         <h1>Javascript Quiz!</h1>
         <p id="Timer"></p>
     </header>
@@ -23,8 +23,14 @@
             <!-- Consider timer count-down till start -->
         </section>
     <!-- quetions will render through JS below this element. -->
-    <section class="question-container">
-
+    <section id="question-container">
+        <h3 id="question-text"></h3>
+            <ul id="answers">
+                <!-- <li id="a1"></li>
+                <li id="a2"></li>
+                <li id="a3"></li>
+                <li id="a4"></li> -->
+            </ul>
         
     </section>
         
