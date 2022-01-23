@@ -138,11 +138,15 @@ function countdown() {
 function getQuestion() {
     // var selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
     var selectedQuestion = questions[i];
-    // console.log(selectedQuestion);
-    // console.log(selectedQuestion.number);
-    // console.log(selectedQuestion.question);
-    // console.log(selectedQuestion.answers);
-    // console.log(selectedQuestion.trueAnswer);
+    // if (i === questions.length) {
+    //     i = 0;
+    //     endGame();
+    // }
+    console.log(selectedQuestion);
+    console.log(selectedQuestion.number);
+    console.log(selectedQuestion.question);
+    console.log(selectedQuestion.answers);
+    console.log(selectedQuestion.trueAnswer);
     questionText.innerText = `${selectedQuestion.question}`;
     for (var index = 0; index < selectedQuestion.answers.length; index++) {
         var newLi = document.createElement("li");
@@ -152,10 +156,6 @@ function getQuestion() {
         newLi.append(newBtn);
         newLi.classList.add(`a${index}`)
         newBtn.classList.add("aButt")
-    }
-    if (i === questions.length) {
-        i = 0;
-        endGame();
     }
 };
 
@@ -195,13 +195,16 @@ ulEl.addEventListener('click', function (e) {
           clearQuestion();
           questions[i++];
           questionsRemaining--
-          getQuestion();
         } else {
           timeRemaining--;
           clearQuestion();
           questions[i++];
           questionsRemaining--
-          getQuestion();
+        } if (i === questions.length) {
+            i = 0;
+            endGame();
+        } else {
+            getQuestion();
         }
       }
     }
