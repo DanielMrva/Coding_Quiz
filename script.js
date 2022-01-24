@@ -118,7 +118,7 @@ function countdown() {
     var timerInterval = setInterval(function() {
         timerEl.textContent = `${timeRemaining} seconds.`;
         timeRemaining--;
-        if (questionsRemaining === 0 || timeRemaining === 0) {
+        if (questionsRemaining === 0 || timeRemaining <= 0) {
             clearInterval(timerInterval);
             endGame();
         }
