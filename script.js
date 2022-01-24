@@ -15,14 +15,14 @@
 // THEN I can save my initials and my score
 
 //var for inputs
-var trueButton = document.getElementsByClassName(".true");
-var falseButton = document.getElementsByClassName(".false");
 var startButton = document.querySelector(".start-button");
-var resetButton = document.getElementById("#reset");
+// var resetButton = document.getElementById("#reset");
+var initialsInput = document.getElementById("initials");
+var initialsBtn = document.getElementById("submit");
 
 //var for time
 var timerEl = document.getElementById("Timer");
-
+timerEl.textContent = "_";
 var timeRemaining = 60;
 
 //var for question tracking
@@ -34,13 +34,7 @@ var container = document.getElementById("question-container");
 var questionText=document.getElementById("question-text")
 var questionH3 = document.createElement("h3");
 var ulEl = document.getElementById("answers");
-var newLi = document.createElement("li")
-var buttonA1 = document.createElement("button");
-var buttonA1 = document.createElement("button");
-var buttonA1 = document.createElement("button");
-var buttonA1 = document.createElement("button");
-
-
+var hsParent = document.getElementById("HS-Div");
 
 //Var for question array, each question is an object with properties of number, question, answers (an array), and a correct answer.  Also a var for question index.
 
@@ -114,14 +108,16 @@ var i = 0;
 var scoreEl = document.getElementById("score");
 var s = 0;
 var score = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-scoreEl.innerText = `Current Score: ${score[s]}`;
+scoreEl.innerText = `Score: ${score[s]}`;
+var scoreBoard = [];
 
 //functions
 
+    //timer function
 function countdown() {
     var timerInterval = setInterval(function() {
-        timeRemaining--;
         timerEl.textContent = `${timeRemaining} seconds.`;
+        timeRemaining--;
         if (questionsRemaining === 0 || timeRemaining === 0) {
             clearInterval(timerInterval);
             endGame();
@@ -129,10 +125,9 @@ function countdown() {
     }, 1000);
 }
 
+    //renders questions from questions array
 function getQuestion() {
     var selectedQuestion = questions[i];
-    console.log(selectedQuestion);
-    console.log(selectedQuestion.number);
     console.log(selectedQuestion.question);
     console.log(selectedQuestion.answers);
     console.log(selectedQuestion.trueAnswer);
@@ -148,23 +143,59 @@ function getQuestion() {
     }
 };
 
-//start game function
+function init() {
+    var storedHigh = JSON.parse(localStorage.getItem("storedHigh"))
+    if (storedHigh !== null) {
+        scoreBoard = storedHigh;
+    }
+    console.log(storedHigh);
+    renderScores();
+    startButton.disabled = false;
+    s = 0;
+}
+
+    //start game function; begins coundown, renders the first question, and disables the start button
 function startGame() {
+    timeRemaining = 60;
     countdown();
     getQuestion();
     startButton.disabled = true;
 }
 
+    //clears out the dynamicaly rendered questions.
 function clearQuestion () {
     while (ulEl.firstChild) {
         ulEl.removeChild(ulEl.firstChild);
         console.log("element removed");
     };
 }
-
+    //end game function
 function endGame() {
     console.log("the game has eneded");
-}
+    console.log(`You scored ${score[s]} points with ${timeRemaining} seconds remaining!`);
+    startButton.disabled = false;
+    init();
+};
+    //stores scoreBoard array to local storage
+function storeScore() {
+    localStorage.setItem("storedHigh", JSON.stringify(scoreBoard));
+};
+
+function clearScores() {
+    while (hsParent.firstChild) {
+        hsParent.removeChild(hsParent.firstChild);
+    }
+};
+
+function renderScores() {
+    clearScores();
+    for (var j = 0; j < scoreBoard.length; j++) {
+        var high = scoreBoard[j];
+        var li = document.createElement("li");
+        hsParent.appendChild(li);
+        li.textContent = high;
+      }
+};
 
 //event listeners for buttons
 
@@ -180,7 +211,7 @@ ulEl.addEventListener('click', function (e) {
         var selectedQuestion = questions[i];
         if (e.target.innerHTML === selectedQuestion.trueAnswer) {
           score[s++];
-          scoreEl.innerText = `Current Score: ${score[s]}`;
+          scoreEl.innerText = `Score: ${score[s]}`;
           clearQuestion();
           questions[i++];
           questionsRemaining--;
@@ -200,4 +231,17 @@ ulEl.addEventListener('click', function (e) {
       }
     }
   });
+
+  initialsBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    var highScore = `${initialsInput.value.trim()} scored ${score[s]} with ${timeRemaining} seconds left!`;
+    
+    scoreBoard.push(highScore)
+    initialsInput.value="";
+
+    storeScore();
+    init();
+  });
+
   
+init();

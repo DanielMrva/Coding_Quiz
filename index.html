@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>Javascript Quiz!!</title>
 </head>
 <body>
     <!-- header. Include score count, title H1, timer counter -->
-    <header>
-        <p id="score"></p>
+    <header class = "top">
         <h1>Javascript Quiz!</h1>
         <p id="Timer"></p>
+        <p id="score"></p>
     </header>
 
     <main>
@@ -20,18 +20,28 @@
         <section class="start">
             <h2>Lets Begin</h2>
             <button class="start-button" type="button">Start</button> 
-            <!-- Consider timer count-down till start -->
         </section>
-    <!-- quetions will render through JS below this element. -->
-    <section id="question-container">
+    <section id="question-container" class="question-section">
         <h3 id="question-text"></h3>
             <ul id="answers">
-                <!-- <li id="a1"></li>
-                <li id="a2"></li>
-                <li id="a3"></li>
-                <li id="a4"></li> -->
+<!-- quetions will render through JS below this element. -->
             </ul>
-        
+    </section>
+    <section id="score-board-container" class="score-section">
+        <form method="post">
+            <div class="input-group">
+                <label for="initials">Initials</label>
+                <input type="text" name="initials" id="initials" placeholder="RGB" />
+            </div>
+            <button id="submit">Save Initials</button>
+        </form>
+        <section id="score-board">
+            <h3>High Scores!!!</h3>
+                <ul id="HS-Div">
+                    
+                </ul>
+
+        </section>
     </section>
         
     <script src="./script.js"></script>
