@@ -26,9 +26,7 @@ var timerEl = document.getElementById("Timer");
 var timeRemaining = 60;
 
 //var for question tracking
-var totalQuestions = 10;
 var questionList = ["q1", "q2", "q3", "q4", "q5", "q6", "q7", "q8", "q9", "q10"];
-var usedQuestions = []
 var questionsRemaining = 10;
 
 //var for rendering html elements
@@ -36,11 +34,6 @@ var container = document.getElementById("question-container");
 var questionText=document.getElementById("question-text")
 var questionH3 = document.createElement("h3");
 var ulEl = document.getElementById("answers");
-// var liEl = document.createElement("li");
-// var a1 = document.getElementById("a1");
-// var a2 = document.getElementById("a2");
-// var a3 = document.getElementById("a3");
-// var a4 = document.getElementById("a4");
 var newLi = document.createElement("li")
 var buttonA1 = document.createElement("button");
 var buttonA1 = document.createElement("button");
@@ -49,7 +42,7 @@ var buttonA1 = document.createElement("button");
 
 
 
-//questions will be in objects, with question number, question, answers, and true answer 
+//Var for question array, each question is an object with properties of number, question, answers (an array), and a correct answer.  Also a var for question index.
 
 var questions = [
     {
@@ -119,8 +112,9 @@ var i = 0;
 
 //var for score
 var scoreEl = document.getElementById("score");
-var score = 0;
-scoreEl.innerText = `Current Score: ${score}`;
+var s = 0;
+var score = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+scoreEl.innerText = `Current Score: ${score[s]}`;
 
 //functions
 
@@ -136,12 +130,7 @@ function countdown() {
 }
 
 function getQuestion() {
-    // var selectedQuestion = questions[Math.floor(Math.random() * questions.length)];
     var selectedQuestion = questions[i];
-    // if (i === questions.length) {
-    //     i = 0;
-    //     endGame();
-    // }
     console.log(selectedQuestion);
     console.log(selectedQuestion.number);
     console.log(selectedQuestion.question);
@@ -151,7 +140,7 @@ function getQuestion() {
     for (var index = 0; index < selectedQuestion.answers.length; index++) {
         var newLi = document.createElement("li");
         var newBtn = document.createElement("button");
-        newBtn.textContent = `${selectedQuestion.answers[index]}`
+        newBtn.innerText = `${selectedQuestion.answers[index]}`
         ulEl.append(newLi);
         newLi.append(newBtn);
         newLi.classList.add(`a${index}`)
@@ -184,25 +173,27 @@ startButton.addEventListener("click", function() {
 });
 
 ulEl.addEventListener('click', function (e) {
-    // But only alert for elements that have an alert-button class
     if (e.target.classList.contains("aButt")) {
-    //   console.log(`${e.target.innerHTML} touched the butt`)
+      console.log(`${e.target.innerHTML} touched the butt`)
       answerCheck();
       function answerCheck() {
         var selectedQuestion = questions[i];
         if (e.target.innerHTML === selectedQuestion.trueAnswer) {
-          score++;
+          score[s++];
+          scoreEl.innerText = `Current Score: ${score[s]}`;
           clearQuestion();
           questions[i++];
-          questionsRemaining--
+          questionsRemaining--;
+          console.log("correct");
         } else {
-          timeRemaining--;
+          timeRemaining -=4;
           clearQuestion();
           questions[i++];
-          questionsRemaining--
+          questionsRemaining--;
+          console.log("incorrect");
         } if (i === questions.length) {
             i = 0;
-            endGame();
+            questionText.innerText = "";
         } else {
             getQuestion();
         }
@@ -210,5 +201,3 @@ ulEl.addEventListener('click', function (e) {
     }
   });
   
-//   ask the class, specifically Nick Martin, how he got his questions to itterate through, also ask how to get score to update.
-//  create end game function to store score, initials, etc.
