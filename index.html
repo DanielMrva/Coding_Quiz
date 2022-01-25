@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./Assets/css/reset.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@1,700&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./Assets/css/style.css">
     <title>Javascript Quiz!!</title>
 </head>
 <body>
@@ -19,31 +23,30 @@
         <!-- start button -->
         <section class="start">
             <h2>Lets Begin</h2>
-            <button class="start-button" type="button">Start</button> 
-        </section>
-    <section id="question-container" class="question-section">
-        <h3 id="question-text"></h3>
-            <ul id="answers">
-<!-- quetions will render through JS below this element. -->
-            </ul>
-    </section>
-    <section id="score-board-container" class="score-section">
-        <form method="post">
-            <div class="input-group">
-                <label for="initials">Initials</label>
-                <input type="text" name="initials" id="initials" placeholder="RGB" />
-            </div>
-            <button id="submit">Save Initials</button>
-        </form>
-        <section id="score-board">
-            <h3>High Scores!!!</h3>
-                <ul id="HS-Div">
+            <section id="question-container" class="question-section">
+                <h3 id="question-text"></h3>
+                    <ul id="answers"></ul>
+            </section>
+            <button class="start-button" type="button">Start</button>
+            <div class="score-form">
+                <button id="submit">Save Initials</button>
+                <form method="post">
+                    <div class="input-group">
+                        <label for="initials">Initials</label>
+                        <input type="text" name="initials" id="initials" placeholder="RGB" />
+                    </div>
                     
-                </ul>
-
+                </form>
+            </div>
         </section>
-    </section>
         
-    <script src="./script.js"></script>
+        <section id="score-board-container" class="score-section">
+            <section id="score-board">
+                <h3>High Scores!!!</h3>
+                    <ul id="HS-Div"></ul>              
+            </section>
+        </section>
+    </main>
+    <script src="./Assets/js/script.js"></script>
 </body>
 </html>

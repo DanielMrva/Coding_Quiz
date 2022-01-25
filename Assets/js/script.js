@@ -41,63 +41,63 @@ var hsParent = document.getElementById("HS-Div");
 var questions = [
     {
         "number": "q1",
-        "question": "4+5=?",
-        "answers": ["1", "7", "9", "3"],
-        "trueAnswer": "9",
+        "question": "Which is correct casing for Javascript?",
+        "answers": ["HORSECASE", "Camel-Case", "camelCase", "train_case"],
+        "trueAnswer": "camelCase",
     },
     {
         "number": "q2",
-        "question": "3x2=?",
-        "answers": ["2", "4", "6", "0"],
-        "trueAnswer": "6",
+        "question": "What element tag contains the JavaScript within an HTML file?",
+        "answers": ["js", "script", "rx", "app"],
+        "trueAnswer": "script",
     }, 
     {
         "number": "q3",
-        "question": "4x5=?",
-        "answers": ["10", "19", "9", "20"],
-        "trueAnswer": "20",
+        "question": "What is the file extension of a Javascript file?",
+        "answers": [".js", ".script", ".javascript", ".starbucks"],
+        "trueAnswer": ".js",
     }, 
     {
         "number": "q4",
-        "question": "2+5=?",
-        "answers": ["7", "3", "11", "10"],
-        "trueAnswer": "7",
+        "question": "A JavaScript function:",
+        "answers": ["is the only way to store data in JS.", "is a block of code for a particular task.", "will always runs while the app is running.", "will self-destruct in 10 seconds."],
+        "trueAnswer": "is a block of code for a particular task.",
     },
     {
         "number": "q5",
-        "question": "10-2=?",
-        "answers": ["12", "7", "10", "8"],
-        "trueAnswer": "8",
+        "question": "A JavaScrript function is executed when:",
+        "answers": ["reads/defines it", "hoists/flags it", "writes/describes it", "invokes/calls it"],
+        "trueAnswer": "invokes/calls it",
     },
     {
         "number": "q6",
-        "question": "12-7=?",
-        "answers": ["19", "5", "8", "3"],
-        "trueAnswer": "5",
+        "question": "An array is a special variable which can hold:",
+        "answers": ["a variable.", "only functions.", "only strings.", "more than one variable."],
+        "trueAnswer": "more than one variable.",
     }, 
     {
         "number": "q7",
-        "question": "14+5=?",
-        "answers": ["19", "15", "9", "0"],
-        "trueAnswer": "19",
+        "question": "Which is the correct formating for a template literal?",
+        "answers": [" `${}` ", " [ ] ", " ' + ' ", " /$ / "],
+        "trueAnswer": " `${}` ",
     }, 
     {
         "number": "q8",
-        "question": "4/2=?",
-        "answers": ["1", "8", "2", "3"],
-        "trueAnswer": "2",
+        "question": "Which group contains ONLY actual JavaScript data types?",
+        "answers": ["String, Number, Quarters, Units", "Boolean, Orbs, Nodes, Numbers", "String, Boolean, Arrays, Numbers", "Times, Objects, Strings, Functions"],
+        "trueAnswer": "String, Boolean, Arrays, Numbers",
     },
     {
         "number": "q9",
-        "question": "20/4=?",
-        "answers": ["5", "2", "80", "24"],
-        "trueAnswer": "5",
+        "question": "Which JavaScript Arithmetic operator is incorrectly matched with its symbol?",
+        "answers": ["Addition +", "Modulus %", "Increment --", "Multiplication *"],
+        "trueAnswer": "Increment --",
     },
     {
         "number": "q10",
-        "question": "7x7=?",
-        "answers": ["50", "17", "14", "49"],
-        "trueAnswer": "49",
+        "question": "How do you create a function in JavaScript?",
+        "answers": ["function aFunction()", "aFunction = function", "function:aFunction", "function[aFunction()]"],
+        "trueAnswer": "function aFunction()",
     }
 ];
 
@@ -151,6 +151,7 @@ function init() {
     console.log(storedHigh);
     renderScores();
     startButton.disabled = false;
+    initialsBtn.disabled = true;
     s = 0;
 }
 
@@ -160,6 +161,7 @@ function startGame() {
     countdown();
     getQuestion();
     startButton.disabled = true;
+    initialsBtn.disabled = true;
 }
 
     //clears out the dynamicaly rendered questions.
@@ -174,7 +176,7 @@ function endGame() {
     console.log("the game has eneded");
     console.log(`You scored ${score[s]} points with ${timeRemaining} seconds remaining!`);
     startButton.disabled = false;
-    init();
+    initialsBtn.disabled = false;
 };
     //stores scoreBoard array to local storage
 function storeScore() {
@@ -234,7 +236,7 @@ ulEl.addEventListener('click', function (e) {
 
   initialsBtn.addEventListener("click", function(event) {
     event.preventDefault();
-    var highScore = `${initialsInput.value.trim()} scored ${score[s]} with ${timeRemaining} seconds left!`;
+    var highScore = `${initialsInput.value.trim()} scored ${score[s]} with ${(timeRemaining + 1)} seconds left!`;
     
     scoreBoard.push(highScore)
     initialsInput.value="";

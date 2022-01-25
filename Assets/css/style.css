@@ -1,0 +1,84 @@
+/* root pseudo-class to assign var for text and colors */
+:root {
+    --bg-color: #fccde2;
+    --bg2-color: #fc5c9c;
+    --text-color: #303a52;
+    --bd-color: #fcefee;
+    --element-color: #c5e3f6;
+    --size-300: clamp(0.7rem, 0.66rem + 0.2vw, 0.8rem);
+    --size-400: clamp(0.88rem, 0.83rem + 0.24vw, 1rem);
+    --size-500: clamp(1.09rem, 1rem + 0.47vw, 1.33rem);
+    --size-600: clamp(1.37rem, 1.21rem + 0.8vw, 1.78rem);
+    --size-700: clamp(1.71rem, 1.45rem + 1.29vw, 2.37rem);
+    --size-800: clamp(2.14rem, 1.74rem + 1.99vw, 3.16rem);
+    --size-900: clamp(2.67rem, 2.07rem + 3vw, 4.21rem);
+    --size-1000: clamp(3.34rem, 2.45rem + 4.43vw, 5.61rem);
+}
+
+/* Universal Selector */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header {
+    background-color: var(--bg2-color);
+    line-height: 1;
+    width: 100%;
+    margin-bottom: 1em;
+    display: flex;
+    flex: 1 0 100%;
+    align-items: end;
+    justify-content: space-between;
+    max-width: 1500px;
+}
+
+main {
+    display: flex;
+    flex: 1 0 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    max-width: 1500px;
+}
+
+h1 {
+    font-size: var(--size-900);
+    padding: 0% 0% 0% 1%;
+}
+
+h2 {
+    font-size: var(--size-700);
+    margin-bottom: .5em;
+}
+
+h3 {
+    font-size: var(--size-500);
+}
+
+p {
+    font-size: var(--size-400);
+    padding: .25% 1%;
+}
+
+ul {
+    padding: .25% 1%;
+}
+
+li {
+    font-size: var(--size-300);
+}
+
+section .start {
+    line-height: 1.5;
+    width: 100%;
+    display: inline;
+}
+
+#question-container {
+    min-height: 200px;
+}
